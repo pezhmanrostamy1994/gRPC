@@ -57,19 +57,15 @@ async function deleteProduct(req, res, next) {
 }
 
 async function getProductData(method, requestData) {
-    try {
-        return await new Promise((resolve, reject) => {
-            method(requestData, (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(data);
-                }
-            });
+    return new Promise((resolve, reject) => {
+        method(requestData, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
         });
-    } catch (err) {
-        throw err;
-    }
+    });
 }
 
 module.exports = {
