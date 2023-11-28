@@ -51,7 +51,11 @@ async function createProduct(req, res, next) {
 async function updateProduct(req, res, next) {
   try {
     const data = req.body;
-    const result = await callGrpcMethod(productClient.updateProduct, data);
+    const { id } = req.params;
+    const result = await callGrpcMethod(productClient.updateProduct, {
+      ...data,
+      id,
+    });
     return res.json(result);
   } catch (err) {
     return res.json(err);
